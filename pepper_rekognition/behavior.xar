@@ -427,8 +427,6 @@ class MyClass(GeneratedClass):
         pass
 
     def onInput_onStart(self, p):
-        self.logger.info("ppp:" + p)
-
         import json
         face_recognized = json.loads(p)
 
@@ -439,19 +437,20 @@ class MyClass(GeneratedClass):
 
         if len(faces) == 0:
             text = "誰も居ないようです"
+            sex = "性別不詳"
+            age = "年齢不詳"
 
         else:
             target_face = faces[0]
             sex = "男性" if target_face["sex"] == 1 else "女性"
             age = "%i歳" % int(target_face["age"])
-            text = age + "歳の" + sex + "ですね！"
+            text = age + "の" + sex + "ですね！"
 
         memory = ALProxy("ALMemory")
         memory.insertData("pepper_google_stt_age", age)
         memory.insertData("pepper_google_stt_sex", sex)
 
         self.onStopped(text)
-
     def onInput_onStop(self):
         self.onUnload() #it is recommended to reuse the clean-up as the box is stopped
         self.onStopped() #activate the output of the box]]>
