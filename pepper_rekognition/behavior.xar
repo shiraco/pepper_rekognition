@@ -447,10 +447,11 @@ class MyClass(GeneratedClass):
             text = age + "の" + sex + "ですね！"
 
         memory = ALProxy("ALMemory")
-        memory.insertData("pepper_google_stt_age", age)
-        memory.insertData("pepper_google_stt_sex", sex)
+        memory.insertData("pepper_rekognition_age", age)
+        memory.insertData("pepper_rekognition_sex", sex)
 
         self.onStopped(text)
+
     def onInput_onStop(self):
         self.onUnload() #it is recommended to reuse the clean-up as the box is stopped
         self.onStopped() #activate the output of the box]]>
